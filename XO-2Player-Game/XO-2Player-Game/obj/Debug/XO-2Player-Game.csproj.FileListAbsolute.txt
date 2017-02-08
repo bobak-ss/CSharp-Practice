@@ -1,0 +1,6 @@
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\bin\Debug\XO-2Player-Game.exe.config
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\bin\Debug\XO-2Player-Game.exe
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\bin\Debug\XO-2Player-Game.pdb
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\obj\Debug\XO-2Player-Game.csprojResolveAssemblyReference.cache
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\obj\Debug\XO-2Player-Game.exe
+C:\Users\BSS\Documents\Visual Studio 2013\Projects\C#\XO-2Player-Game\XO-2Player-Game\obj\Debug\XO-2Player-Game.pdb
