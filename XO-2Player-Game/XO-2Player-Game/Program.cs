@@ -5,6 +5,183 @@ namespace XO_2Player_Game
     class Program
     {
         /**
+            checks given wining scenario
+
+            @params: array of player choices
+            @returns: true if the scenario exist and given player is the winner
+        */
+        static bool check(int[] choices, int secondChoice, int thirdChoice)
+        {
+            for (int i = 0; i < 5; i++)
+                if (choices[i] == secondChoice)
+                    for (int j = 0; j < 5; j++)
+                        if (choices[j] == thirdChoice)
+                            return true;
+            return false;
+        }
+
+        /**
+            checks if the game has a winner every time it's been called
+            * checks by going throw every possible way of winning in X-O
+
+            @params: an array of player choices to check
+            @returns: true if the player wins false if not
+        */
+        static bool WinCheck(int[] playerChoices)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (playerChoices[i] == 1) // *************************** 1
+                {
+                    if (check(playerChoices, 2, 3)) // 1, 2, 3
+                        return true;
+                    
+                    if (check(playerChoices, 3, 2)) // 1, 2, 3
+                        return true;
+                    
+                    if (check(playerChoices, 4, 7)) // 1, 4, 7
+                        return true;
+
+                    if (check(playerChoices, 7, 4)) // 1, 7, 4
+                        return true;
+                    
+                    if (check(playerChoices, 5, 9)) // 1, 5, 9
+                        return true;
+
+                    if (check(playerChoices, 9, 5)) // 1, 9, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 3) // *************************** 3
+                {
+                    if (check(playerChoices, 2, 1)) // 3, 2, 1
+                        return true;
+                    
+                    if (check(playerChoices, 1, 2)) // 3, 1, 2
+                        return true;
+                    
+                    if (check(playerChoices, 6, 9)) // 3, 6, 9
+                        return true;
+
+                    if (check(playerChoices, 9, 6)) // 3, 9, 6
+                        return true;
+                    
+                    if (check(playerChoices, 5, 7)) // 3, 5, 7
+                        return true;
+
+                    if (check(playerChoices, 7, 5)) // 3, 7, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 7) // *************************** 7
+                {
+                    if (check(playerChoices, 8, 9)) // 7, 8, 9
+                        return true;
+
+                    if (check(playerChoices, 9, 8)) // 7, 9, 8
+                        return true;
+                    
+                    if (check(playerChoices, 4, 1)) // 7, 4, 1
+                        return true;
+                    
+                    if (check(playerChoices, 1, 4)) // 7, 1, 4
+                        return true;
+                    
+                    if (check(playerChoices, 5, 3)) // 7, 5, 3
+                        return true;
+
+                    if (check(playerChoices, 3, 5)) // 7, 3, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 9) // *************************** 9
+                {
+                    if (check(playerChoices, 8, 7)) // 9, 8, 7
+                        return true;
+                    
+                    if (check(playerChoices, 7, 8)) // 9, 7, 8
+                        return true;
+                    
+                    if (check(playerChoices, 6, 3)) // 9, 6, 3
+                        return true;
+
+                    if (check(playerChoices, 3, 6)) // 9, 3, 6
+                        return true;
+                    
+                    if (check(playerChoices, 5, 1)) // 9, 5, 1
+                        return true;
+
+                    if (check(playerChoices, 1, 5)) // 9, 1, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 2) // *************************** 2
+                {
+                    if (check(playerChoices, 5, 8)) // 2, 5, 8
+                        return true;
+
+                    if (check(playerChoices, 8, 9)) // 2, 8, 9
+                        return true;
+                }
+
+                if (playerChoices[i] == 4) // *************************** 4
+                {
+                    if (check(playerChoices, 5, 6)) // 4, 5, 6
+                        return true;
+
+                    if (check(playerChoices, 6, 5)) // 4, 6, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 6) // *************************** 6
+                {
+                    if (check(playerChoices, 5, 4)) // 6, 5, 4
+                        return true;
+
+                    if (check(playerChoices, 8, 9)) // 6, 4, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 8) // *************************** 8
+                {
+                    if (check(playerChoices, 5, 2)) // 8, 5, 2
+                        return true;
+
+                    if (check(playerChoices, 8, 9)) // 8, 2, 5
+                        return true;
+                }
+
+                if (playerChoices[i] == 5) // *************************** 5
+                {
+                    if (check(playerChoices, 2, 8)) // 5, 2, 8
+                        return true;
+                    
+                    if (check(playerChoices, 8, 2)) // 5, 8, 2
+                        return true;
+
+                    if (check(playerChoices, 4, 6)) // 5, 4, 6
+                        return true;
+                    
+                    if (check(playerChoices, 6, 4)) // 5, 6, 4
+                        return true;
+
+                    if (check(playerChoices, 1, 9)) // 5, 1, 9
+                        return true;
+
+                    if (check(playerChoices, 6, 4)) // 5, 9, 1
+                        return true;
+
+                    if (check(playerChoices, 6, 4)) // 5, 3, 7
+                        return true;
+
+                    if (check(playerChoices, 6, 4)) // 5, 7, 3
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        /**
             Runs the game and user interface!(UI)
             * players play by typing numbers from 1 to 9
               each number represents a field in the grid
@@ -90,264 +267,6 @@ namespace XO_2Player_Game
             }
         }
 
-        /**
-            checks if the game has a winner every time it's been called
-            * checks by going throw every possible way of winning in X-O
-
-            @params: an array of player choices to check
-            @returns: true if the player wins false if not
-        */
-        static bool WinCheck(int[] playerChoices)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                if (playerChoices[i] == 1) // *************************** 1
-                {
-                    for (int j = 0; j < 5; j++) // 1, 2, 3
-                        if (playerChoices[j] == 2)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 3)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 1, 3, 2
-                        if (playerChoices[j] == 3)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 2)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 1, 4, 7
-                        if (playerChoices[j] == 4)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 7)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 1, 7, 4
-                        if (playerChoices[j] == 7)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 4)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 1, 5, 9
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 9)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 1, 9, 5
-                        if (playerChoices[j] == 9)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 3) // *************************** 3
-                {
-                    for (int j = 0; j < 5; j++) // 3, 2, 1
-                        if (playerChoices[j] == 2)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 1)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 3, 1, 2
-                        if (playerChoices[j] == 1)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 2)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 3, 6, 9
-                        if (playerChoices[j] == 6)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 9)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 3, 9, 6
-                        if (playerChoices[j] == 9)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 6)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 3, 5, 7
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 7)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 3, 7, 5
-                        if (playerChoices[j] == 7)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 7) // *************************** 7
-                {
-                    for (int j = 0; j < 5; j++) // 7, 8, 9
-                        if (playerChoices[j] == 8)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 9)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 7, 9, 8
-                        if (playerChoices[j] == 9)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 8)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 7, 4, 1
-                        if (playerChoices[j] == 4)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 1)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 7, 1, 4
-                        if (playerChoices[j] == 1)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 4)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 7, 5, 3
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 3)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 7, 3, 5
-                        if (playerChoices[j] == 3)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 9) // *************************** 9
-                {
-                    for (int j = 0; j < 5; j++) // 9, 8, 7
-                        if (playerChoices[j] == 8)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 7)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 9, 7, 8
-                        if (playerChoices[j] == 7)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 8)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 9, 6, 3
-                        if (playerChoices[j] == 6)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 3)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 9, 3, 6
-                        if (playerChoices[j] == 3)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 6)
-                                    return true;
-
-                    for (int j = 0; j < 5; j++) // 9, 5, 1
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 1)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 9, 1, 5
-                        if (playerChoices[j] == 1)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 2) // *************************** 2
-                {
-                    for (int j = 0; j < 5; j++) // 2, 5, 8
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 8)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 2, 8, 5
-                        if (playerChoices[j] == 8)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 4) // *************************** 4
-                {
-                    for (int j = 0; j < 5; j++) // 4, 5, 6
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 6)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 4, 6, 5
-                        if (playerChoices[j] == 6)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 6) // *************************** 6
-                {
-                    for (int j = 0; j < 5; j++) // 6, 5, 4
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 4)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 6, 4, 5
-                        if (playerChoices[j] == 4)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 8) // *************************** 8
-                {
-                    for (int j = 0; j < 5; j++) // 8, 5, 2
-                        if (playerChoices[j] == 5)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 2)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 8, 2, 5
-                        if (playerChoices[j] == 2)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 5)
-                                    return true;
-                }
-
-                if (playerChoices[i] == 5) // *************************** 5
-                {
-                    for (int j = 0; j < 5; j++) // 5, 2, 8
-                        if (playerChoices[j] == 2)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 8)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 8, 2
-                        if (playerChoices[j] == 8)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 2)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 4, 6
-                        if (playerChoices[j] == 4)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 6)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 6, 4
-                        if (playerChoices[j] == 6)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 4)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 1, 9
-                        if (playerChoices[j] == 1)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 9)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 9, 1
-                        if (playerChoices[j] == 9)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 1)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 3, 7
-                        if (playerChoices[j] == 3)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 7)
-                                    return true;
-                    for (int j = 0; j < 5; j++) // 5, 7, 3
-                        if (playerChoices[j] == 7)
-                            for (int z = 0; z < 5; z++)
-                                if (playerChoices[z] == 3)
-                                    return true;
-                }
-            }
-            return false;
-        }
-
         static void Main()
         {
             int SelectedOption = 0;
@@ -384,8 +303,6 @@ namespace XO_2Player_Game
 
 
             Console.WriteLine("\n\n\t Thank you for playing. Bye :-]");
-
-            Console.ReadLine();
         }
     }
 }
