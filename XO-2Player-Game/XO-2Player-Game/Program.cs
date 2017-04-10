@@ -10,7 +10,7 @@ namespace XO_2Player_Game
             @params: array of player choices
             @returns: true if the scenario exist and given player is the winner
         */
-        static bool check(int[] choices, int secondChoice, int thirdChoice)
+        static bool check(ref int[] choices, int secondChoice, int thirdChoice)
         {
             for (int i = 0; i < 5; i++)
                 if (choices[i] == secondChoice)
@@ -27,154 +27,154 @@ namespace XO_2Player_Game
             @params: an array of player choices to check
             @returns: true if the player wins false if not
         */
-        static bool WinCheck(int[] playerChoices)
+        static bool WinCheck(ref int[] playerChoices)
         {
             for (int i = 0; i < 5; i++)
             {
                 if (playerChoices[i] == 1) // *************************** 1
                 {
-                    if (check(playerChoices, 2, 3)) // 1, 2, 3
+                    if (check(ref playerChoices, 2, 3)) // 1, 2, 3
                         return true;
                     
-                    if (check(playerChoices, 3, 2)) // 1, 2, 3
+                    if (check(ref playerChoices, 3, 2)) // 1, 2, 3
                         return true;
                     
-                    if (check(playerChoices, 4, 7)) // 1, 4, 7
+                    if (check(ref playerChoices, 4, 7)) // 1, 4, 7
                         return true;
 
-                    if (check(playerChoices, 7, 4)) // 1, 7, 4
+                    if (check(ref playerChoices, 7, 4)) // 1, 7, 4
                         return true;
                     
-                    if (check(playerChoices, 5, 9)) // 1, 5, 9
+                    if (check(ref playerChoices, 5, 9)) // 1, 5, 9
                         return true;
 
-                    if (check(playerChoices, 9, 5)) // 1, 9, 5
+                    if (check(ref playerChoices, 9, 5)) // 1, 9, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 3) // *************************** 3
                 {
-                    if (check(playerChoices, 2, 1)) // 3, 2, 1
+                    if (check(ref playerChoices, 2, 1)) // 3, 2, 1
                         return true;
                     
-                    if (check(playerChoices, 1, 2)) // 3, 1, 2
+                    if (check(ref playerChoices, 1, 2)) // 3, 1, 2
                         return true;
                     
-                    if (check(playerChoices, 6, 9)) // 3, 6, 9
+                    if (check(ref playerChoices, 6, 9)) // 3, 6, 9
                         return true;
 
-                    if (check(playerChoices, 9, 6)) // 3, 9, 6
+                    if (check(ref playerChoices, 9, 6)) // 3, 9, 6
                         return true;
                     
-                    if (check(playerChoices, 5, 7)) // 3, 5, 7
+                    if (check(ref playerChoices, 5, 7)) // 3, 5, 7
                         return true;
 
-                    if (check(playerChoices, 7, 5)) // 3, 7, 5
+                    if (check(ref playerChoices, 7, 5)) // 3, 7, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 7) // *************************** 7
                 {
-                    if (check(playerChoices, 8, 9)) // 7, 8, 9
+                    if (check(ref playerChoices, 8, 9)) // 7, 8, 9
                         return true;
 
-                    if (check(playerChoices, 9, 8)) // 7, 9, 8
+                    if (check(ref playerChoices, 9, 8)) // 7, 9, 8
                         return true;
                     
-                    if (check(playerChoices, 4, 1)) // 7, 4, 1
+                    if (check(ref playerChoices, 4, 1)) // 7, 4, 1
                         return true;
                     
-                    if (check(playerChoices, 1, 4)) // 7, 1, 4
+                    if (check(ref playerChoices, 1, 4)) // 7, 1, 4
                         return true;
                     
-                    if (check(playerChoices, 5, 3)) // 7, 5, 3
+                    if (check(ref playerChoices, 5, 3)) // 7, 5, 3
                         return true;
 
-                    if (check(playerChoices, 3, 5)) // 7, 3, 5
+                    if (check(ref playerChoices, 3, 5)) // 7, 3, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 9) // *************************** 9
                 {
-                    if (check(playerChoices, 8, 7)) // 9, 8, 7
+                    if (check(ref playerChoices, 8, 7)) // 9, 8, 7
                         return true;
                     
-                    if (check(playerChoices, 7, 8)) // 9, 7, 8
+                    if (check(ref playerChoices, 7, 8)) // 9, 7, 8
                         return true;
                     
-                    if (check(playerChoices, 6, 3)) // 9, 6, 3
+                    if (check(ref playerChoices, 6, 3)) // 9, 6, 3
                         return true;
 
-                    if (check(playerChoices, 3, 6)) // 9, 3, 6
+                    if (check(ref playerChoices, 3, 6)) // 9, 3, 6
                         return true;
                     
-                    if (check(playerChoices, 5, 1)) // 9, 5, 1
+                    if (check(ref playerChoices, 5, 1)) // 9, 5, 1
                         return true;
 
-                    if (check(playerChoices, 1, 5)) // 9, 1, 5
+                    if (check(ref playerChoices, 1, 5)) // 9, 1, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 2) // *************************** 2
                 {
-                    if (check(playerChoices, 5, 8)) // 2, 5, 8
+                    if (check(ref playerChoices, 5, 8)) // 2, 5, 8
                         return true;
 
-                    if (check(playerChoices, 8, 9)) // 2, 8, 9
+                    if (check(ref playerChoices, 8, 9)) // 2, 8, 9
                         return true;
                 }
 
                 if (playerChoices[i] == 4) // *************************** 4
                 {
-                    if (check(playerChoices, 5, 6)) // 4, 5, 6
+                    if (check(ref playerChoices, 5, 6)) // 4, 5, 6
                         return true;
 
-                    if (check(playerChoices, 6, 5)) // 4, 6, 5
+                    if (check(ref playerChoices, 6, 5)) // 4, 6, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 6) // *************************** 6
                 {
-                    if (check(playerChoices, 5, 4)) // 6, 5, 4
+                    if (check(ref playerChoices, 5, 4)) // 6, 5, 4
                         return true;
 
-                    if (check(playerChoices, 8, 9)) // 6, 4, 5
+                    if (check(ref playerChoices, 8, 9)) // 6, 4, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 8) // *************************** 8
                 {
-                    if (check(playerChoices, 5, 2)) // 8, 5, 2
+                    if (check(ref playerChoices, 5, 2)) // 8, 5, 2
                         return true;
 
-                    if (check(playerChoices, 8, 9)) // 8, 2, 5
+                    if (check(ref playerChoices, 8, 9)) // 8, 2, 5
                         return true;
                 }
 
                 if (playerChoices[i] == 5) // *************************** 5
                 {
-                    if (check(playerChoices, 2, 8)) // 5, 2, 8
+                    if (check(ref playerChoices, 2, 8)) // 5, 2, 8
                         return true;
                     
-                    if (check(playerChoices, 8, 2)) // 5, 8, 2
+                    if (check(ref playerChoices, 8, 2)) // 5, 8, 2
                         return true;
 
-                    if (check(playerChoices, 4, 6)) // 5, 4, 6
+                    if (check(ref playerChoices, 4, 6)) // 5, 4, 6
                         return true;
                     
-                    if (check(playerChoices, 6, 4)) // 5, 6, 4
+                    if (check(ref playerChoices, 6, 4)) // 5, 6, 4
                         return true;
 
-                    if (check(playerChoices, 1, 9)) // 5, 1, 9
+                    if (check(ref playerChoices, 1, 9)) // 5, 1, 9
                         return true;
 
-                    if (check(playerChoices, 6, 4)) // 5, 9, 1
+                    if (check(ref playerChoices, 6, 4)) // 5, 9, 1
                         return true;
 
-                    if (check(playerChoices, 6, 4)) // 5, 3, 7
+                    if (check(ref playerChoices, 6, 4)) // 5, 3, 7
                         return true;
 
-                    if (check(playerChoices, 6, 4)) // 5, 7, 3
+                    if (check(ref playerChoices, 6, 4)) // 5, 7, 3
                         return true;
                 }
             }
@@ -200,7 +200,7 @@ namespace XO_2Player_Game
 
             int[] PlayerA = new int[5];             // player A inputs
             int[] PlayerB = new int[5];             // player B inputs
-            int[] usedFields = new int[99];         // saves used fields to prevent reusing the field 
+            int[] usedFields = new int[9];         // saves used fields to prevent reusing the field 
             int counter = 1;                        // usedFields counter
             string input;
 
@@ -230,7 +230,7 @@ namespace XO_2Player_Game
 
                 usedFields[counter] = PlayerA[i];   // if the input is OK push it in usedFields
                 counter++;
-                if (WinCheck(PlayerA))              // checks if the player wins it or not in every turn
+                if (WinCheck(ref PlayerA))              // checks if the player wins it or not in every turn
                 {
                     Console.WriteLine("\n\tPlayer A is the Winner!");
                     break;
@@ -259,7 +259,7 @@ namespace XO_2Player_Game
                 } while (valid == false);
                 usedFields[counter] = PlayerB[i];
                 counter++;
-                if (WinCheck(PlayerB))
+                if (WinCheck(ref PlayerB))
                 {
                     Console.WriteLine("\n\tPlayer B is the Winner!");
                     break;
