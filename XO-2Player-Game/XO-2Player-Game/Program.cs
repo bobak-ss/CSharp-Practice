@@ -2,22 +2,92 @@
 
 namespace XO_2Player_Game
 {
-    class Program
+    class Game
     {
         /**
-            checks given wining scenario
-
-            @params: array of player choices
-            @returns: true if the scenario exist and given player is the winner
+            Runs the game and user interface!(UI)
+            * players play by typing numbers from 1 to 9
+              each number represents a field in the grid
+              the grid is organized just as the same as right numerial keyboard
+              on every normal keyboard
+            * saves player inputs into a array of 5
+              then examines player A & player B inputs to find the winner
+            
+            @params: none
+            @retruns: none
         */
-        static bool check(ref int[] choices, int secondChoice, int thirdChoice)
+        public void play()
         {
+            Console.Clear();
+            Console.WriteLine("\n\t****** X-O ******");
+
+            int[] PlayerA = new int[5];             // player A inputs
+            int[] PlayerB = new int[5];             // player B inputs
+            int[] usedFields = new int[9];         // saves used fields to prevent reusing the field 
+            int counter = 1;                        // usedFields counter
+            string input;
+
             for (int i = 0; i < 5; i++)
-                if (choices[i] == secondChoice)
-                    for (int j = 0; j < 5; j++)
-                        if (choices[j] == thirdChoice)
-                            return true;
-            return false;
+            {
+                Console.Write("Player A: ");
+                input = Console.ReadLine();
+                Int32.TryParse(input, out PlayerA[i]);      // changes input type from string to int
+                bool valid = true;
+                do
+                {
+                    // checks if inputed field number is used or not.(is filled already?)
+                    for (int j = counter - 1; j >= 0; j--)
+                    {
+                        if (usedFields[j] == PlayerA[i])
+                        {
+                            valid = false;
+                            Console.WriteLine("This field is used! try again: ");
+                            input = Console.ReadLine();
+                            Int32.TryParse(input, out PlayerA[i]);
+                            break;
+                        }
+                        else
+                            valid = true;
+                    }
+                } while (valid == false);
+
+                usedFields[counter] = PlayerA[i];   // if the input is OK push it in usedFields
+                counter++;
+                if (this.winCheck(ref PlayerA))              // checks if the player wins it or not in every turn
+                {
+                    Console.WriteLine("\n\tPlayer A is the Winner!");
+                    break;
+                }
+
+                // everything happened for Player A also happens to Player B
+                Console.Write("Player B: ");
+                input = Console.ReadLine();
+                Int32.TryParse(input, out PlayerB[i]);
+                valid = true;
+                do
+                {
+                    for (int j = counter - 1; j >= 0; j--)
+                    {
+                        if (usedFields[j] == PlayerB[i])
+                        {
+                            valid = false;
+                            Console.Write("This field is used! try again: ");
+                            input = Console.ReadLine();
+                            Int32.TryParse(input, out PlayerB[i]);
+                            break;
+                        }
+                        else
+                            valid = true;
+                    }
+                } while (valid == false);
+                usedFields[counter] = PlayerB[i];
+                counter++;
+                if (this.winCheck(ref PlayerB))
+                {
+                    Console.WriteLine("\n\tPlayer B is the Winner!");
+                    break;
+                }
+            }
         }
 
         /**
@@ -27,7 +97,7 @@ namespace XO_2Player_Game
             @params: an array of player choices to check
             @returns: true if the player wins false if not
         */
-        static bool WinCheck(ref int[] playerChoices)
+        public bool winCheck(ref int[] playerChoices)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -35,16 +105,16 @@ namespace XO_2Player_Game
                 {
                     if (check(ref playerChoices, 2, 3)) // 1, 2, 3
                         return true;
-                    
+
                     if (check(ref playerChoices, 3, 2)) // 1, 2, 3
                         return true;
-                    
+
                     if (check(ref playerChoices, 4, 7)) // 1, 4, 7
                         return true;
 
                     if (check(ref playerChoices, 7, 4)) // 1, 7, 4
                         return true;
-                    
+
                     if (check(ref playerChoices, 5, 9)) // 1, 5, 9
                         return true;
 
@@ -56,16 +126,16 @@ namespace XO_2Player_Game
                 {
                     if (check(ref playerChoices, 2, 1)) // 3, 2, 1
                         return true;
-                    
+
                     if (check(ref playerChoices, 1, 2)) // 3, 1, 2
                         return true;
-                    
+
                     if (check(ref playerChoices, 6, 9)) // 3, 6, 9
                         return true;
 
                     if (check(ref playerChoices, 9, 6)) // 3, 9, 6
                         return true;
-                    
+
                     if (check(ref playerChoices, 5, 7)) // 3, 5, 7
                         return true;
 
@@ -80,13 +150,13 @@ namespace XO_2Player_Game
 
                     if (check(ref playerChoices, 9, 8)) // 7, 9, 8
                         return true;
-                    
+
                     if (check(ref playerChoices, 4, 1)) // 7, 4, 1
                         return true;
-                    
+
                     if (check(ref playerChoices, 1, 4)) // 7, 1, 4
                         return true;
-                    
+
                     if (check(ref playerChoices, 5, 3)) // 7, 5, 3
                         return true;
 
@@ -98,16 +168,16 @@ namespace XO_2Player_Game
                 {
                     if (check(ref playerChoices, 8, 7)) // 9, 8, 7
                         return true;
-                    
+
                     if (check(ref playerChoices, 7, 8)) // 9, 7, 8
                         return true;
-                    
+
                     if (check(ref playerChoices, 6, 3)) // 9, 6, 3
                         return true;
 
                     if (check(ref playerChoices, 3, 6)) // 9, 3, 6
                         return true;
-                    
+
                     if (check(ref playerChoices, 5, 1)) // 9, 5, 1
                         return true;
 
@@ -155,13 +225,13 @@ namespace XO_2Player_Game
                 {
                     if (check(ref playerChoices, 2, 8)) // 5, 2, 8
                         return true;
-                    
+
                     if (check(ref playerChoices, 8, 2)) // 5, 8, 2
                         return true;
 
                     if (check(ref playerChoices, 4, 6)) // 5, 4, 6
                         return true;
-                    
+
                     if (check(ref playerChoices, 6, 4)) // 5, 6, 4
                         return true;
 
@@ -182,91 +252,23 @@ namespace XO_2Player_Game
         }
 
         /**
-            Runs the game and user interface!(UI)
-            * players play by typing numbers from 1 to 9
-              each number represents a field in the grid
-              the grid is organized just as the same as right numerial keyboard
-              on every normal keyboard
-            * saves player inputs into a array of 5
-              then examines player A & player B inputs to find the winner
-            
-            @params: none
-            @retruns: none
+            checks given wining scenario
+
+            @params: array of player choices
+            @returns: true if the scenario exist and given player is the winner
         */
-        static void XO()
+        public bool check(ref int[] choices, int secondChoice, int thirdChoice)
         {
-            Console.Clear();
-            Console.WriteLine("\n\t****** X-O ******");
-
-            int[] PlayerA = new int[5];             // player A inputs
-            int[] PlayerB = new int[5];             // player B inputs
-            int[] usedFields = new int[9];         // saves used fields to prevent reusing the field 
-            int counter = 1;                        // usedFields counter
-            string input;
-
             for (int i = 0; i < 5; i++)
-            {
-                Console.Write("Player A: ");
-                input = Console.ReadLine();
-                Int32.TryParse(input, out PlayerA[i]);      // changes input type from string to int
-                bool valid = true;
-                do
-                {
-                    // checks if inputed field number is used or not.(is filled already?)
-                    for (int j = counter - 1; j >= 0; j--)
-                    {
-                        if (usedFields[j] == PlayerA[i])
-                        {
-                            valid = false;
-                            Console.WriteLine("This field is used! try again: ");
-                            input = Console.ReadLine();
-                            Int32.TryParse(input, out PlayerA[i]);
-                            break;
-                        }
-                        else
-                            valid = true;
-                    }
-                } while (valid == false);
-
-                usedFields[counter] = PlayerA[i];   // if the input is OK push it in usedFields
-                counter++;
-                if (WinCheck(ref PlayerA))              // checks if the player wins it or not in every turn
-                {
-                    Console.WriteLine("\n\tPlayer A is the Winner!");
-                    break;
-                }
-
-                // everything happened for Player A also happens to Player B
-                Console.Write("Player B: ");
-                input = Console.ReadLine();
-                Int32.TryParse(input, out PlayerB[i]);
-                valid = true;
-                do
-                {
-                    for (int j = counter - 1; j >= 0; j--)
-                    {
-                        if (usedFields[j] == PlayerB[i])
-                        {
-                            valid = false;
-                            Console.Write("This field is used! try again: ");
-                            input = Console.ReadLine();
-                            Int32.TryParse(input, out PlayerB[i]);
-                            break;
-                        }
-                        else
-                            valid = true;
-                    }
-                } while (valid == false);
-                usedFields[counter] = PlayerB[i];
-                counter++;
-                if (WinCheck(ref PlayerB))
-                {
-                    Console.WriteLine("\n\tPlayer B is the Winner!");
-                    break;
-                }
-            }
+                if (choices[i] == secondChoice)
+                    for (int j = 0; j < 5; j++)
+                        if (choices[j] == thirdChoice)
+                            return true;
+            return false;
         }
-
+    }
+    class Program
+    {
         static void Main()
         {
             int SelectedOption = 0;
@@ -274,7 +276,7 @@ namespace XO_2Player_Game
             bool valid = false;
 
             Console.WriteLine("\n\t****** WELCOME TO X-O ******");
-            Console.Write("\n\tType '1' to start the game with your friend: ");
+            Console.Write("\n\tType '1' to start the game with your friend, or ");
             input = Console.ReadLine();
             Console.WriteLine();
             Int32.TryParse(input, out SelectedOption);
@@ -284,13 +286,13 @@ namespace XO_2Player_Game
                 switch (SelectedOption)
                 {
                     case 1:
-                        XO();           // starts game function
-
+                        Game g = new Game();
+                        g.play();
                         Console.WriteLine("Try Again? type 'yes' or 'no': ");
                         input = Console.ReadLine();
-                        if( input == "yes" || input == "YES" || input == "Yes" )
+                        if (input == "yes" || input == "YES" || input == "Yes")
                             valid = false;
-                        if( input == "no" || input == "NO" || input == "No" )
+                        if (input == "no" || input == "NO" || input == "No")
                             valid = true;
                         break;
                     default:
@@ -303,6 +305,7 @@ namespace XO_2Player_Game
 
 
             Console.WriteLine("\n\n\t Thank you for playing. Bye :-]");
+            Console.ReadKey();
         }
     }
 }
